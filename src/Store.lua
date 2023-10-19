@@ -1,6 +1,7 @@
 local RunService = game:GetService("RunService")
 
-local Signal = require(script.Parent.Signal)
+-- local Signal = require(script.Parent.Signal)
+local FakeSignal = require(script.Parent.FakeSignal)
 local NoYield = require(script.Parent.NoYield)
 
 local ACTION_LOG_LENGTH = 3
@@ -60,7 +61,8 @@ function Store.new(reducer, initialState, middlewares, errorReporter, devtools)
 	self._errorReporter = errorReporter or rethrowErrorReporter
 	self._isDispatching = false
 	self._lastState = nil
-	self.changed = Signal.new(self)
+	-- self.changed = Signal.new(self)
+	self.changed = FakeSignal.new()
 
 	self._reducer = reducer
 	self._flushHandler = function(state)
